@@ -1,5 +1,5 @@
 import express from "express";
-import { Print } from "../config/adapters/print.adapter";
+import { Print } from "@adapters/print.adapter";
 
 interface Options {
   SERVER_PORT: number;
