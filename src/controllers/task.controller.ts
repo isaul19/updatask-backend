@@ -19,4 +19,15 @@ export class TaskController {
       handleError(res, error);
     }
   };
+
+  public listTasks = async (req: Request, res: Response) => {
+    const { paramsValidator } = req.body;
+
+    try {
+      const data = await this.taskService.listTasks(paramsValidator);
+      res.status(200).json({ message: "Get Tasks successfully", data });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }

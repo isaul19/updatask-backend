@@ -41,6 +41,8 @@ export class ProjectRouter {
       taskController.createTask,
     );
 
+    router.get("/:projectId/task", paramsValidator(ProjectIdDto), existsProjectValidator, taskController.listTasks);
+
     return router;
   }
 }
