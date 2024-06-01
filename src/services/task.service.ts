@@ -36,6 +36,6 @@ export class TaskService {
   };
 
   public deleteTask = async (task: ITask, project: IProject) => {
-    await this.taskRepository.deleteTask(task.id, project.id);
+    await this.taskRepository.deleteTask(task.id, project);
   };
 }

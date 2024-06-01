@@ -35,7 +35,8 @@ export class TaskRepository {
     await this.taskModel.updateOne({ _id: taskId.taskId, project: projectId }, updateTaskDto);
   };
 
-  public deleteTask = async (taskId: TaskIdDto, projectId: ObjectId) => {
-    await this.taskModel.deleteOne({ _id: taskId.taskId, project: projectId });
+  public deleteTask = async (taskId: ObjectId, project: IProject) => {
+    project.tasks.filter((t) => t?._id !== taskId);
+    await Promise.allSettled([project.save(), this.taskModel.deleteOne({ _id: taskId, project: project.id })]);
   };
 }
