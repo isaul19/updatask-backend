@@ -19,10 +19,14 @@
     "paths": {
       "@boostrap/*": ["./src/boostrap/*"],
       "@adapters/*": ["./src/config/adapters/*"],
-      "@interfaces/*": ["./src/config/interfaces/*"],
       "@routers/*": ["./src/routers/*"],
       "@controllers/*": ["./src/controllers/*"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@services/*": ["./src/services/*"],
+      "@models/*": ["./src/models/*"],
+      "@errors/*": ["./src/config/errors/*"],
+      "@dtos/*": ["./src/dtos/*"],
+      "@middlewares/*": ["./src/middlewares/*"]
     }
   },
   "include": ["./src"],
