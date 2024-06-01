@@ -1,8 +1,5 @@
 import type { Request, Response } from "express";
-import { MongooseError } from "mongoose";
-import { Print } from "@adapters/print.adapter";
 import type { ProjectService } from "@services/project.service";
-import { Project } from "@models/project.modal";
 import { handleError } from "@config/errors/handle.error";
 
 export class ProjectController {
@@ -21,10 +18,21 @@ export class ProjectController {
     }
   };
 
+  public getProjectById = async (req: Request, res: Response) => {
+    const { paramsValidator } = req.body;
+    try {
+      const project = await this.projectService.getProjectById(paramsValidator);
+      res.status(200).json({ message: "Get Project successfully", data: project });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
   public createProject = async (req: Request, res: Response) => {
     const { bodyValidator } = req.body;
     try {
       await this.projectService.createProject(bodyValidator);
+      res.status(201).json({ message: "Create Project successfully" });
     } catch (error) {
       handleError(res, error);
     }

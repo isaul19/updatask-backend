@@ -24,7 +24,8 @@
       "@models/*": ["./src/models/*"],
       "@errors/*": ["./src/config/errors/*"],
       "@dtos/*": ["./src/dtos/*"],
-      "@middlewares/*": ["./src/middlewares/*"]
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@repositories/*": ["./src/repositories/*"]
     }
   },
   "module": {
