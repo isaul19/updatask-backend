@@ -11,6 +11,6 @@ export class TaskService {
 
   public createTask = async (createTaskDto: CreateTaskDto, project: IProject) => {
     createTaskDto.project = project.id;
-    await this.taskRepository.createTask(createTaskDto);
+    await this.taskRepository.createTask(createTaskDto, project);
   };
 }
