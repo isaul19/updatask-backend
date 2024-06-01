@@ -1,5 +1,5 @@
-import mongoose, { Schema, PopulatedDoc, Types } from "mongoose";
-import { ITask, TaskCollectionName } from "./task.model";
+import mongoose, { Schema, type PopulatedDoc, type Document, Types } from "mongoose";
+import type { ITask } from "./task.model";
 
 export interface IProject extends Document {
   projectName: string;
@@ -31,12 +31,11 @@ export const ProjectSchema: Schema = new Schema(
     tasks: [
       {
         type: Types.ObjectId,
-        ref: TaskCollectionName,
+        ref: "Task",
       },
     ],
   },
   { timestamps: true },
 );
 
-export const ProjectCollectionName = "Project";
-export const Project = mongoose.model<IProject>(ProjectCollectionName, ProjectSchema);
+export const Project = mongoose.model<IProject>("Project", ProjectSchema);

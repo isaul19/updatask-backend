@@ -1,5 +1,4 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
-import { ProjectCollectionName } from "./project.model";
+import mongoose, { Schema, type Document, Types } from "mongoose";
 
 const taskStatus = {
   PENDING: "PENDING",
@@ -33,7 +32,7 @@ export const TaskSchema: Schema = new Schema(
 
     project: {
       type: Types.ObjectId,
-      ref: ProjectCollectionName,
+      ref: "Project",
     },
 
     status: {
@@ -46,5 +45,4 @@ export const TaskSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-export const TaskCollectionName = "Task";
-export const Task = mongoose.model<ITask>(TaskCollectionName, TaskSchema);
+export const Task = mongoose.model<ITask>("Task", TaskSchema);
