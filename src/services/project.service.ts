@@ -1,6 +1,7 @@
 import { ProjectRepository } from "@repositories/project.repository";
 import type { MongoIdDto } from "@dtos/_common/mongo-id.dto";
 import type { CreateProjectDto } from "@dtos/project";
+import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
 import { CustomError } from "@config/errors/custom.error";
 
 export class ProjectService {
@@ -23,5 +24,13 @@ export class ProjectService {
 
   public createProject = async (project: CreateProjectDto) => {
     await this.projectRepository.createProject(project);
+  };
+
+  public updateProject = async (projectId: MongoIdDto, project: UpdateProjectDto) => {
+    await this.projectRepository.updateProject(projectId, project);
+  };
+
+  public deleteProject = async (projectId: MongoIdDto) => {
+    await this.projectRepository.deleteProject(projectId);
   };
 }

@@ -1,5 +1,6 @@
 import type { MongoIdDto } from "@dtos/_common/mongo-id.dto";
 import type { CreateProjectDto } from "@dtos/project";
+import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
 import { Project } from "@models/project.modal";
 
 export class ProjectRepository {
@@ -23,5 +24,13 @@ export class ProjectRepository {
     const createdProject = new this.projectModel(project);
     await createdProject.save();
     return createdProject;
+  };
+
+  public updateProject = async (mongoIdDto: MongoIdDto, updateProjectDto: UpdateProjectDto) => {
+    await this.projectModel.updateOne({ _id: mongoIdDto.id }, updateProjectDto);
+  };
+
+  public deleteProject = async (mongoIdDto: MongoIdDto) => {
+    await this.projectModel.deleteOne({ _id: mongoIdDto.id });
   };
 }

@@ -37,4 +37,24 @@ export class ProjectController {
       handleError(res, error);
     }
   };
+
+  public updateProject = async (req: Request, res: Response) => {
+    const { paramsValidator, bodyValidator } = req.body;
+    try {
+      await this.projectService.updateProject(paramsValidator, bodyValidator);
+      res.status(200).json({ message: "Update Project successfully" });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
+  public deleteProject = async (req: Request, res: Response) => {
+    const { paramsValidator } = req.body;
+    try {
+      await this.projectService.deleteProject(paramsValidator);
+      res.status(200).json({ message: "Delete Project successfully" });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }

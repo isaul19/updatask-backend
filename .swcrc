@@ -17,12 +17,13 @@
     "paths": {
       "@boostrap/*": ["./src/boostrap/*"],
       "@adapters/*": ["./src/config/adapters/*"],
+      "@lib/*": ["./src/config/lib/*"],
+      "@errors/*": ["./src/config/errors/*"],
       "@routers/*": ["./src/routers/*"],
       "@controllers/*": ["./src/controllers/*"],
       "@config/*": ["./src/config/*"],
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
-      "@errors/*": ["./src/config/errors/*"],
       "@dtos/*": ["./src/dtos/*"],
       "@middlewares/*": ["./src/middlewares/*"],
       "@repositories/*": ["./src/repositories/*"]

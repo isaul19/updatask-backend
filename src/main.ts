@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { Database } from "@boostrap/database.boostrap";
 import { Server } from "@boostrap/server.bootrap";
 import { Env } from "@adapters/env.adapter";
