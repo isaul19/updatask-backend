@@ -11,11 +11,9 @@ export class TaskRepository {
 
   public createTask = async (createTaskDto: CreateTaskDto, project: IProject) => {
     const createdTask = new this.taskModel(createTaskDto);
-    await createdTask.save();
-
     project.tasks.push(createdTask);
-    await project.save();
 
+    await Promise.allSettled([createdTask.save(), project.save()]);
     return createdTask;
   };
 }

@@ -10,10 +10,10 @@ export class TaskController {
   }
 
   public createTask = async (req: Request, res: Response) => {
-    const { bodyValidator, project } = req.body;
+    const { bodyValidator } = req.body;
 
     try {
-      await this.taskService.createTask(bodyValidator, project);
+      await this.taskService.createTask(bodyValidator, req.project);
       res.status(201).json({ message: "Create Task successfully" });
     } catch (error) {
       handleError(res, error);

@@ -22,12 +22,13 @@ export class ProjectRouter {
     const taskController = new TaskController(taskService);
 
     router.get("/", projectController.listProjects);
-    router.get("/:projectId", paramsValidator(ProjectIdDto), projectController.getProjectById);
+    router.get("/:projectId", paramsValidator(ProjectIdDto), existsProjectValidator, projectController.getProjectById);
     router.post("/", bodyValidator(CreateProjectDto), projectController.createProject);
     router.put(
       "/:projectId",
       paramsValidator(ProjectIdDto),
       bodyValidator(UpdateProjectDto),
+      existsProjectValidator,
       projectController.updateProject,
     );
     router.delete("/:projectId", paramsValidator(ProjectIdDto), projectController.deleteProject);
@@ -35,8 +36,8 @@ export class ProjectRouter {
     router.post(
       "/:projectId/task",
       paramsValidator(ProjectIdDto),
-      existsProjectValidator,
       bodyValidator(CreateTaskDto),
+      existsProjectValidator,
       taskController.createTask,
     );
 
