@@ -1,7 +1,7 @@
 import type { MongoIdDto } from "@dtos/_common/mongo-id.dto";
 import type { CreateProjectDto } from "@dtos/project";
 import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
-import { Project } from "@models/project.modal";
+import { Project } from "@models/project.model";
 
 export class ProjectRepository {
   private projectModel;
