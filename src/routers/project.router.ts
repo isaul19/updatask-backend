@@ -10,6 +10,7 @@ import { TaskController } from "@controllers/task.controller";
 import { existsProjectValidator } from "@middlewares/validators/project/exists-project.validator";
 import { ProjectIdDto } from "@dtos/_common/project-id.dto";
 import { CreateTaskDto } from "@dtos/task";
+import { TaskIdDto } from "@dtos/task/task-id.dto";
 
 export class ProjectRouter {
   public static get router() {
@@ -22,7 +23,7 @@ export class ProjectRouter {
     const taskController = new TaskController(taskService);
 
     router.get("/", projectController.listProjects);
-    router.get("/:projectId", paramsValidator(ProjectIdDto), existsProjectValidator, projectController.getProjectById);
+    router.get("/:projectId", paramsValidator(ProjectIdDto), projectController.getProjectById);
     router.post("/", bodyValidator(CreateProjectDto), projectController.createProject);
     router.put(
       "/:projectId",
@@ -42,6 +43,13 @@ export class ProjectRouter {
     );
 
     router.get("/:projectId/task", paramsValidator(ProjectIdDto), existsProjectValidator, taskController.listTasks);
+
+    router.get(
+      "/:projectId/task/:taskId",
+      paramsValidator(ProjectIdDto),
+      paramsValidator(TaskIdDto),
+      taskController.getTaskById,
+    );
 
     return router;
   }

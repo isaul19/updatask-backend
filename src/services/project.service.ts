@@ -2,6 +2,7 @@ import { ProjectRepository } from "@repositories/project.repository";
 import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
 import type { CreateProjectDto } from "@dtos/project";
 import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
+import { CustomError } from "@errors/custom.error";
 
 export class ProjectService {
   private projectRepository: ProjectRepository;
@@ -15,8 +16,9 @@ export class ProjectService {
     return projects;
   };
 
-  public getProjectById = async (projectId: ProjectIdDto) => {
-    const project = await this.projectRepository.getProjectById(projectId);
+  public getProjectById = async (projectIdDto: ProjectIdDto) => {
+    const project = await this.projectRepository.getProjectById(projectIdDto);
+    if (!project) throw CustomError.notFound(`project ${projectIdDto.projectId} not found`);
     return project;
   };
 

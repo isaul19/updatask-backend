@@ -2,6 +2,7 @@ import { Task } from "@models/task.model";
 import type { IProject } from "@models/project.model";
 import type { CreateTaskDto } from "@dtos/task";
 import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
+import type { TaskIdDto } from "@dtos/task/task-id.dto";
 
 export class TaskRepository {
   private taskModel;
@@ -19,7 +20,12 @@ export class TaskRepository {
   };
 
   public listTasks = async (projectIdDto: ProjectIdDto) => {
-    const tasks = await this.taskModel.find({ project: projectIdDto.projectId });
+    const tasks = await this.taskModel.find({ project: projectIdDto.projectId }).populate("project");
     return tasks;
+  };
+
+  public getTaskById = async (taskId: TaskIdDto) => {
+    const task = await this.taskModel.findById(taskId.taskId);
+    return task;
   };
 }

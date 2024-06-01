@@ -11,7 +11,7 @@ export class ProjectRepository {
   }
 
   public listProjects = async () => {
-    const projects = await this.projectModel.find();
+    const projects = await this.projectModel.find().populate("tasks");
     return projects;
   };
 

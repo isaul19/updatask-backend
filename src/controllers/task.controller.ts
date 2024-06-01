@@ -30,4 +30,15 @@ export class TaskController {
       handleError(res, error);
     }
   };
+
+  public getTaskById = async (req: Request, res: Response) => {
+    const { paramsValidator } = req.body;
+
+    try {
+      const data = await this.taskService.getTaskById(paramsValidator);
+      res.status(200).json({ message: "Get Task successfully", data });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
