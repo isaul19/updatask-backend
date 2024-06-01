@@ -15,11 +15,12 @@ declare global {
 
 export const existsProjectValidator = async (req: Request, res: Response, next: NextFunction) => {
   const { paramsValidator } = req.body;
+  const projectIdDto = paramsValidator as ProjectIdDto;
 
   try {
     const projectRepository = new ProjectRepository();
-    const project = await projectRepository.getProjectById(paramsValidator as ProjectIdDto);
-    if (!project) throw CustomError.notFound("Project not found");
+    const project = await projectRepository.getProjectById(projectIdDto);
+    if (!project) throw CustomError.notFound(`Project ${projectIdDto.projectId} not found`);
 
     req.project = project;
     next();

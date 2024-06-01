@@ -15,11 +15,11 @@ declare global {
 
 export const existsTaskValidator = async (req: Request, res: Response, next: NextFunction) => {
   const { paramsValidator } = req.body;
-
+  const taskIdDto = paramsValidator as TaskIdDto;
   try {
     const taskRepository = new TaskRepository();
-    const task = await taskRepository.getTaskById(paramsValidator as TaskIdDto);
-    if (!task) throw CustomError.notFound("Project not found");
+    const task = await taskRepository.getTaskById(taskIdDto, req.project.id);
+    if (!task) throw CustomError.notFound(`Task ${taskIdDto.taskId} not found`);
 
     req.task = task;
     next();

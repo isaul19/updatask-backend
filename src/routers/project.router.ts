@@ -11,6 +11,7 @@ import { existsProjectValidator } from "@middlewares/validators/project/exists-p
 import { ProjectIdDto } from "@dtos/_common/project-id.dto";
 import { CreateTaskDto } from "@dtos/task";
 import { TaskIdDto } from "@dtos/task/task-id.dto";
+import { existsTaskValidator } from "@middlewares/validators/task/exists-task.validator";
 
 export class ProjectRouter {
   public static get router() {
@@ -28,8 +29,8 @@ export class ProjectRouter {
     router.put(
       "/:projectId",
       paramsValidator(ProjectIdDto),
-      bodyValidator(UpdateProjectDto),
       existsProjectValidator,
+      bodyValidator(UpdateProjectDto),
       projectController.updateProject,
     );
     router.delete("/:projectId", paramsValidator(ProjectIdDto), projectController.deleteProject);
@@ -37,8 +38,8 @@ export class ProjectRouter {
     router.post(
       "/:projectId/task",
       paramsValidator(ProjectIdDto),
-      bodyValidator(CreateTaskDto),
       existsProjectValidator,
+      bodyValidator(CreateTaskDto),
       taskController.createTask,
     );
 
@@ -47,8 +48,27 @@ export class ProjectRouter {
     router.get(
       "/:projectId/task/:taskId",
       paramsValidator(ProjectIdDto),
+      existsProjectValidator,
       paramsValidator(TaskIdDto),
       taskController.getTaskById,
+    );
+
+    router.put(
+      "/:projectId/task/:taskId",
+      paramsValidator(ProjectIdDto),
+      existsProjectValidator,
+      paramsValidator(TaskIdDto),
+      existsTaskValidator,
+      taskController.updateTask,
+    );
+
+    router.delete(
+      "/:projectId/task/:taskId",
+      paramsValidator(ProjectIdDto),
+      existsProjectValidator,
+      paramsValidator(TaskIdDto),
+      existsTaskValidator,
+      taskController.deleteTask,
     );
 
     return router;

@@ -33,10 +33,31 @@ export class TaskController {
 
   public getTaskById = async (req: Request, res: Response) => {
     const { paramsValidator } = req.body;
+    const project = req.project;
 
     try {
-      const data = await this.taskService.getTaskById(paramsValidator);
+      const data = await this.taskService.getTaskById(paramsValidator, project.id);
       res.status(200).json({ message: "Get Task successfully", data });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
+  public updateTask = async (req: Request, res: Response) => {
+    const { bodyValidator } = req.body;
+
+    try {
+      await this.taskService.updateTask(bodyValidator, req.task, req.project);
+      res.status(200).json({ message: "Update Task successfully" });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
+  public deleteTask = async (req: Request, res: Response) => {
+    try {
+      await this.taskService.deleteTask(req.task, req.project);
+      res.status(200).json({ message: "Delete Task successfully" });
     } catch (error) {
       handleError(res, error);
     }

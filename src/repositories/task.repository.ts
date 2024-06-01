@@ -3,6 +3,8 @@ import type { IProject } from "@models/project.model";
 import type { CreateTaskDto } from "@dtos/task";
 import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
 import type { TaskIdDto } from "@dtos/task/task-id.dto";
+import type { ObjectId } from "mongoose";
+import type { UpdateTaskDto } from "@dtos/task/update-task.dto";
 
 export class TaskRepository {
   private taskModel;
@@ -24,8 +26,16 @@ export class TaskRepository {
     return tasks;
   };
 
-  public getTaskById = async (taskId: TaskIdDto) => {
-    const task = await this.taskModel.findById(taskId.taskId);
+  public getTaskById = async (taskId: TaskIdDto, projectId: ObjectId) => {
+    const task = await this.taskModel.findOne({ _id: taskId.taskId, project: projectId });
     return task;
+  };
+
+  public updateTask = async (taskId: TaskIdDto, projectId: ObjectId, updateTaskDto: UpdateTaskDto) => {
+    await this.taskModel.updateOne({ _id: taskId.taskId, project: projectId }, updateTaskDto);
+  };
+
+  public deleteTask = async (taskId: TaskIdDto, projectId: ObjectId) => {
+    await this.taskModel.deleteOne({ _id: taskId.taskId, project: projectId });
   };
 }
