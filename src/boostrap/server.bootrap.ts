@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { Print } from "@adapters/print.adapter";
 
 interface Options {
@@ -19,16 +20,17 @@ export class Server {
     this.routes();
   }
 
-  routes() {
+  public routes() {
     this.app.use("/api", this.APP_ROUTER);
   }
 
-  middlewares() {
+  public middlewares() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cors());
   }
 
-  start = () => {
+  public start = () => {
     this.app.listen(this.SERVER_PORT, () => {
       Print.success(`Server running in port ${this.SERVER_PORT}`);
     });

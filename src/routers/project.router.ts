@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 import { ProjectController } from "@controllers/project.controller";
 import { ProjectService } from "@services/project.service";
 import { CreateProjectDto } from "@dtos/project";
@@ -13,10 +13,12 @@ import { CreateTaskDto } from "@dtos/task";
 import { TaskIdDto } from "@dtos/task/task-id.dto";
 import { existsTaskValidator } from "@middlewares/validators/task/exists-task.validator";
 import { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
+import { wrapGlobalHandlerError } from "@errors/global-handle.error";
 
 export class ProjectRouter {
   public static get router() {
-    const router = express.Router();
+    const router = Router();
+    wrapGlobalHandlerError(router);
 
     const projectService = new ProjectService();
     const projectController = new ProjectController(projectService);
@@ -34,6 +36,7 @@ export class ProjectRouter {
       bodyValidator(UpdateProjectDto),
       projectController.updateProject,
     );
+
     router.delete("/:projectId", paramsValidator(ProjectIdDto), projectController.deleteProject);
 
     router.post(
