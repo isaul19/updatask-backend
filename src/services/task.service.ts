@@ -7,6 +7,7 @@ import { CustomError } from "@errors/custom.error";
 import type { ObjectId } from "mongoose";
 import type { UpdateTaskDto } from "@dtos/task/update-task.dto";
 import type { ITask } from "@models/task.model";
+import type { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
 
 export class TaskService {
   private taskRepository: TaskRepository;
@@ -31,11 +32,15 @@ export class TaskService {
     return task;
   };
 
-  public updateTask = async (updateTaskDto: UpdateTaskDto, task: ITask, project: IProject) => {
-    await this.taskRepository.updateTask(task.id, project.id, updateTaskDto);
+  public updateTask = async (updateTaskDto: UpdateTaskDto, taskId: ObjectId, projectId: ObjectId) => {
+    await this.taskRepository.updateTask(updateTaskDto, taskId, projectId);
   };
 
   public deleteTask = async (task: ITask, project: IProject) => {
     await this.taskRepository.deleteTask(task.id, project);
+  };
+
+  public updateTaskStatus = async (updateTaskStatusDto: UpdateTaskStatusDto, taskId: ObjectId, projectId: ObjectId) => {
+    await this.taskRepository.updateTaskStatus(updateTaskStatusDto, taskId, projectId);
   };
 }

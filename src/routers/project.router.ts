@@ -12,6 +12,7 @@ import { ProjectIdDto } from "@dtos/_common/project-id.dto";
 import { CreateTaskDto } from "@dtos/task";
 import { TaskIdDto } from "@dtos/task/task-id.dto";
 import { existsTaskValidator } from "@middlewares/validators/task/exists-task.validator";
+import { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
 
 export class ProjectRouter {
   public static get router() {
@@ -69,6 +70,16 @@ export class ProjectRouter {
       paramsValidator(TaskIdDto),
       existsTaskValidator,
       taskController.deleteTask,
+    );
+
+    router.post(
+      "/:projectId/task/:taskId/status",
+      paramsValidator(ProjectIdDto),
+      existsProjectValidator,
+      paramsValidator(TaskIdDto),
+      existsTaskValidator,
+      bodyValidator(UpdateTaskStatusDto),
+      taskController.updateTaskStatus,
     );
 
     return router;

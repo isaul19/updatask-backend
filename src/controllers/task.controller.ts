@@ -45,9 +45,11 @@ export class TaskController {
 
   public updateTask = async (req: Request, res: Response) => {
     const { bodyValidator } = req.body;
+    const taskId = req.task.id;
+    const projectId = req.project.id;
 
     try {
-      await this.taskService.updateTask(bodyValidator, req.task, req.project);
+      await this.taskService.updateTask(bodyValidator, taskId, projectId);
       res.status(200).json({ message: "Update Task successfully" });
     } catch (error) {
       handleError(res, error);
@@ -58,6 +60,19 @@ export class TaskController {
     try {
       await this.taskService.deleteTask(req.task, req.project);
       res.status(200).json({ message: "Delete Task successfully" });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
+  public updateTaskStatus = async (req: Request, res: Response) => {
+    const { bodyValidator } = req.body;
+    const projectId = req.project.id;
+    const taskId = req.task.id;
+
+    try {
+      await this.taskService.updateTaskStatus(bodyValidator, taskId, projectId);
+      res.status(200).json({ message: "Update Task Status successfully" });
     } catch (error) {
       handleError(res, error);
     }

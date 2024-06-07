@@ -5,6 +5,7 @@ import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
 import type { TaskIdDto } from "@dtos/task/task-id.dto";
 import type { ObjectId } from "mongoose";
 import type { UpdateTaskDto } from "@dtos/task/update-task.dto";
+import type { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
 
 export class TaskRepository {
   private taskModel;
@@ -31,12 +32,16 @@ export class TaskRepository {
     return task;
   };
 
-  public updateTask = async (taskId: TaskIdDto, projectId: ObjectId, updateTaskDto: UpdateTaskDto) => {
-    await this.taskModel.updateOne({ _id: taskId.taskId, project: projectId }, updateTaskDto);
+  public updateTask = async (updateTaskDto: UpdateTaskDto, taskId: ObjectId, projectId: ObjectId) => {
+    await this.taskModel.updateOne({ _id: taskId, project: projectId }, updateTaskDto);
   };
 
   public deleteTask = async (taskId: ObjectId, project: IProject) => {
     project.tasks.filter((t) => t?._id !== taskId);
     await Promise.allSettled([project.save(), this.taskModel.deleteOne({ _id: taskId, project: project.id })]);
+  };
+
+  public updateTaskStatus = async (updateTaskDto: UpdateTaskStatusDto, taskId: ObjectId, projectId: ObjectId) => {
+    await this.taskModel.updateOne({ _id: taskId, project: projectId }, updateTaskDto);
   };
 }
