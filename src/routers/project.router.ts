@@ -1,19 +1,19 @@
 import { Router } from "express";
-import { ProjectController } from "@controllers/project.controller";
-import { ProjectService } from "@services/project.service";
-import { CreateProjectDto } from "@dtos/project";
-import { bodyValidator } from "@middlewares/validators/_common/body.validator";
-import { paramsValidator } from "@middlewares/validators/_common/params.validator";
-import { UpdateProjectDto } from "@dtos/project/update-project.dto";
-import { TaskService } from "@services/task.service";
-import { TaskController } from "@controllers/task.controller";
-import { existsProjectValidator } from "@middlewares/validators/project/exists-project.validator";
-import { ProjectIdDto } from "@dtos/_common/project-id.dto";
-import { CreateTaskDto } from "@dtos/task";
-import { TaskIdDto } from "@dtos/task/task-id.dto";
-import { existsTaskValidator } from "@middlewares/validators/task/exists-task.validator";
-import { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
+
 import { wrapGlobalHandlerError } from "@errors/global-handle.error";
+
+import { ProjectService } from "@services/project.service";
+import { TaskService } from "@services/task.service";
+
+import { ProjectController } from "@controllers/project.controller";
+import { TaskController } from "@controllers/task.controller";
+
+import { bodyValidator, paramsValidator } from "@middlewares/validators/_common";
+import { existsTaskValidator } from "@middlewares/validators/task";
+import { existsProjectValidator } from "@middlewares/validators/project";
+
+import { CreateProjectDto, ProjectIdDto, UpdateProjectDto } from "@dtos/project";
+import { CreateTaskDto, TaskIdDto, UpdateTaskStatusDto } from "@dtos/task";
 
 export class ProjectRouter {
   public static get router() {

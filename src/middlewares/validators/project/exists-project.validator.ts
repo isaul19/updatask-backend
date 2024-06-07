@@ -1,4 +1,4 @@
-import { ProjectIdDto } from "@dtos/_common/project-id.dto";
+import { ProjectIdDto } from "@dtos/project/project-id.dto";
 import { CustomError } from "@errors/custom.error";
 import { handleError } from "@errors/handle.error";
 import { IProject } from "@models/project.model";

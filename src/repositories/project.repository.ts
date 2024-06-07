@@ -1,5 +1,5 @@
 import { Project } from "@models/project.model";
-import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
+import type { ProjectIdDto } from "@dtos/project/project-id.dto";
 import type { CreateProjectDto } from "@dtos/project";
 import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
 

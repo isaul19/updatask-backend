@@ -1,13 +1,14 @@
-import { TaskRepository } from "@repositories/task.repository";
-import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
-import type { CreateTaskDto } from "@dtos/task";
-import type { TaskIdDto } from "@dtos/task/task-id.dto";
-import type { IProject } from "@models/project.model";
-import { CustomError } from "@errors/custom.error";
 import type { ObjectId } from "mongoose";
-import type { UpdateTaskDto } from "@dtos/task/update-task.dto";
+
+import { TaskRepository } from "@repositories/task.repository";
+
+import { CustomError } from "@errors/custom.error";
+
+import type { IProject } from "@models/project.model";
 import type { ITask } from "@models/task.model";
-import type { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
+
+import type { CreateTaskDto, TaskIdDto, UpdateTaskDto, UpdateTaskStatusDto } from "@dtos/task";
+import type { ProjectIdDto } from "@dtos/project";
 
 export class TaskService {
   private taskRepository: TaskRepository;

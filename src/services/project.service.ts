@@ -1,8 +1,8 @@
 import { ProjectRepository } from "@repositories/project.repository";
-import type { ProjectIdDto } from "@dtos/_common/project-id.dto";
-import type { CreateProjectDto } from "@dtos/project";
-import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
+
 import { CustomError } from "@errors/custom.error";
+
+import type { CreateProjectDto, ProjectIdDto, UpdateProjectDto } from "@dtos/project";
 
 export class ProjectService {
   private projectRepository: ProjectRepository;
