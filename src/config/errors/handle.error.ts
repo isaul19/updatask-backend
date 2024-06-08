@@ -17,6 +17,7 @@ const mappingError = (error: unknown): ErrorResponse => {
     };
   }
 
+  console.log(error);
   if (Array.isArray(error)) {
     const errors = error as ValidationError[];
     const formatError: ErrorProperty = {};
@@ -48,7 +49,6 @@ const mappingError = (error: unknown): ErrorResponse => {
 };
 
 export const handleError = (res: Response, error: unknown) => {
-  console.log(error);
   const response = mappingError(error);
   res.status(response.statusCode).json(response);
 };
