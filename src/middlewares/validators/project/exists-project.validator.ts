@@ -1,9 +1,8 @@
-import { ProjectIdDto } from "@dtos/project/project-id.dto";
+import type { NextFunction, Request, Response } from "express";
+
 import { CustomError } from "@errors/custom.error";
-import { handleError } from "@errors/handle.error";
 import { IProject } from "@models/project.model";
 import { ProjectRepository } from "@repositories/project.repository";
-import type { NextFunction, Request, Response } from "express";
 
 declare global {
   namespace Express {
@@ -14,9 +13,10 @@ declare global {
 }
 
 export const existsProjectValidator = async (req: Request, res: Response, next: NextFunction) => {
+  const projectRepository = new ProjectRepository();
+
   const projectIdDto = req.body.paramsValidator;
 
-  const projectRepository = new ProjectRepository();
   const project = await projectRepository.getProjectById(projectIdDto);
   if (!project) throw CustomError.notFound(`Project ${projectIdDto.projectId} not found`);
 
