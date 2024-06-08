@@ -142,25 +142,25 @@ export const projectPath: Paths = {
   },
 
   [BASE_PATH + "/{projectId}/task"]: {
-    get: {
-      tags: ["Project"],
-      summary: "List all tasks by project id",
-      parameters: [
-        {
-          name: "projectId",
-          in: "path",
-          required: true,
-          schema: {
-            type: "string",
-          },
-        },
-      ],
-      responses: {
-        "200": {
-          description: "List all tasks by project id successfully",
-        },
-      },
-    },
+    // get: {
+    //   tags: ["Project"],
+    //   summary: "List all tasks by project id",
+    //   parameters: [
+    //     {
+    //       name: "projectId",
+    //       in: "path",
+    //       required: true,
+    //       schema: {
+    //         type: "string",
+    //       },
+    //     },
+    //   ],
+    //   responses: {
+    //     "200": {
+    //       description: "List all tasks by project id successfully",
+    //     },
+    //   },
+    // },
 
     post: {
       tags: ["Project"],
@@ -206,33 +206,33 @@ export const projectPath: Paths = {
   },
 
   [BASE_PATH + "/{projectId}/task/{taskId}"]: {
-    get: {
-      tags: ["Project"],
-      summary: "Get task by id",
-      parameters: [
-        {
-          name: "projectId",
-          in: "path",
-          required: true,
-          schema: {
-            type: "string",
-          },
-        },
-        {
-          name: "taskId",
-          in: "path",
-          required: true,
-          schema: {
-            type: "string",
-          },
-        },
-      ],
-      responses: {
-        "200": {
-          description: "Get task by id successfully",
-        },
-      },
-    },
+    // get: {
+    //   tags: ["Project"],
+    //   summary: "Get task by id",
+    //   parameters: [
+    //     {
+    //       name: "projectId",
+    //       in: "path",
+    //       required: true,
+    //       schema: {
+    //         type: "string",
+    //       },
+    //     },
+    //     {
+    //       name: "taskId",
+    //       in: "path",
+    //       required: true,
+    //       schema: {
+    //         type: "string",
+    //       },
+    //     },
+    //   ],
+    //   responses: {
+    //     "200": {
+    //       description: "Get task by id successfully",
+    //     },
+    //   },
+    // },
 
     put: {
       tags: ["Project"],
