@@ -1,8 +1,6 @@
+import type { ObjectId } from "mongoose";
 import { ProjectRepository } from "@repositories/project.repository";
-
-import { CustomError } from "@errors/custom.error";
-
-import type { CreateProjectDto, ProjectIdDto, UpdateProjectDto } from "@dtos/project";
+import type { CreateProjectDto, UpdateProjectDto } from "@dtos/project";
 
 export class ProjectService {
   private projectRepository: ProjectRepository;
@@ -16,9 +14,8 @@ export class ProjectService {
     return projects;
   };
 
-  public getProjectById = async (projectIdDto: ProjectIdDto) => {
-    const project = await this.projectRepository.getProjectById(projectIdDto);
-    if (!project) throw CustomError.notFound(`project ${projectIdDto.projectId} not found`);
+  public getProjectById = async (projectId: ObjectId) => {
+    const project = await this.projectRepository.getProjectById(projectId);
     return project;
   };
 
@@ -26,11 +23,11 @@ export class ProjectService {
     await this.projectRepository.createProject(createProjectDto);
   };
 
-  public updateProject = async (projectIdDto: ProjectIdDto, updateProjectDto: UpdateProjectDto) => {
-    await this.projectRepository.updateProject(projectIdDto, updateProjectDto);
+  public updateProject = async (projectId: ObjectId, updateProjectDto: UpdateProjectDto) => {
+    await this.projectRepository.updateProject(projectId, updateProjectDto);
   };
 
-  public deleteProject = async (projectIdDto: ProjectIdDto) => {
-    await this.projectRepository.deleteProject(projectIdDto);
+  public deleteProject = async (projectId: ObjectId) => {
+    await this.projectRepository.deleteProject(projectId);
   };
 }

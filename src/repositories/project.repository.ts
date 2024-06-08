@@ -1,7 +1,6 @@
+import type { ObjectId } from "mongoose";
 import { Project } from "@models/project.model";
-import type { ProjectIdDto } from "@dtos/project/project-id.dto";
-import type { CreateProjectDto } from "@dtos/project";
-import type { UpdateProjectDto } from "@dtos/project/update-project.dto";
+import type { CreateProjectDto, UpdateProjectDto } from "@dtos/project";
 
 export class ProjectRepository {
   private projectModel;
@@ -15,8 +14,8 @@ export class ProjectRepository {
     return projects;
   };
 
-  public getProjectById = async (projectId: ProjectIdDto) => {
-    const project = await this.projectModel.findById(projectId.projectId).populate("tasks");
+  public getProjectById = async (projectId: ObjectId) => {
+    const project = await this.projectModel.findById(projectId).populate("tasks");
     return project;
   };
 
@@ -26,11 +25,11 @@ export class ProjectRepository {
     return createdProject;
   };
 
-  public updateProject = async (projectIdDto: ProjectIdDto, updateProjectDto: UpdateProjectDto) => {
-    await this.projectModel.updateOne({ _id: projectIdDto.projectId }, updateProjectDto);
+  public updateProject = async (projectId: ObjectId, updateProjectDto: UpdateProjectDto) => {
+    await this.projectModel.updateOne({ _id: projectId }, updateProjectDto);
   };
 
-  public deleteProject = async (projectIdDto: ProjectIdDto) => {
-    await this.projectModel.deleteOne({ _id: projectIdDto.projectId });
+  public deleteProject = async (projectId: ObjectId) => {
+    await this.projectModel.deleteOne({ _id: projectId });
   };
 }

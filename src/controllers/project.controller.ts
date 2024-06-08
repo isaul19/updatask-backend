@@ -14,8 +14,8 @@ export class ProjectController {
   };
 
   public getProjectById = async (req: Request, res: Response) => {
-    const projectIdDto = req.body.paramsValidator;
-    const project = await this.projectService.getProjectById(projectIdDto);
+    const projectId = req.project.id;
+    const project = await this.projectService.getProjectById(projectId);
     res.status(200).json({ message: "Get Project successfully", data: project });
   };
 
@@ -26,15 +26,15 @@ export class ProjectController {
   };
 
   public updateProject = async (req: Request, res: Response) => {
-    const projectIdDto = req.body.paramsValidator;
     const updateProjectDto = req.body.bodyValidator;
-    await this.projectService.updateProject(projectIdDto, updateProjectDto);
+    const projectId = req.project.id;
+    await this.projectService.updateProject(projectId, updateProjectDto);
     res.status(200).json({ message: "Update Project successfully" });
   };
 
   public deleteProject = async (req: Request, res: Response) => {
-    const projectIdDto = req.body.paramsValidator;
-    await this.projectService.deleteProject(projectIdDto);
+    const projectId = req.project.id;
+    await this.projectService.deleteProject(projectId);
     res.status(200).json({ message: "Delete Project successfully" });
   };
 }

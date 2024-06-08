@@ -1,10 +1,7 @@
+import type { ObjectId } from "mongoose";
 import { Task } from "@models/task.model";
 import type { IProject } from "@models/project.model";
-import type { CreateTaskDto } from "@dtos/task";
-import type { TaskIdDto } from "@dtos/task/task-id.dto";
-import type { ObjectId } from "mongoose";
-import type { UpdateTaskDto } from "@dtos/task/update-task.dto";
-import type { UpdateTaskStatusDto } from "@dtos/task/update-task-status.dto";
+import type { CreateTaskDto, UpdateTaskDto, UpdateTaskStatusDto } from "@dtos/task";
 
 export class TaskRepository {
   private taskModel;
@@ -21,8 +18,8 @@ export class TaskRepository {
     return createdTask;
   };
 
-  public getTaskById = async (taskId: TaskIdDto, projectId: ObjectId) => {
-    const task = await this.taskModel.findOne({ _id: taskId.taskId, project: projectId });
+  public getTaskById = async (taskId: ObjectId, projectId: ObjectId) => {
+    const task = await this.taskModel.findOne({ _id: taskId, project: projectId });
     return task;
   };
 
