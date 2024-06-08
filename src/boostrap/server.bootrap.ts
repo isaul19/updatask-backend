@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { Print } from "@adapters/print.adapter";
+import { inicializateDocs } from "@config/docs/swagger";
 
 interface Options {
   SERVER_PORT: number;
@@ -34,5 +35,7 @@ export class Server {
     this.app.listen(this.SERVER_PORT, () => {
       Print.success(`Server running in port ${this.SERVER_PORT}`);
     });
+
+    inicializateDocs(this.app);
   };
 }

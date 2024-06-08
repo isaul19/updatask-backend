@@ -1,5 +1,4 @@
-import { IsOptional, IsString, MinLength } from "class-validator";
-import { ObjectId } from "mongoose";
+import { IsString, MinLength } from "class-validator";
 
 export class CreateTaskDto {
   @IsString()
@@ -9,7 +8,4 @@ export class CreateTaskDto {
   @IsString()
   @MinLength(2)
   description!: string;
-
-  @IsOptional()
-  project?: ObjectId;
 }

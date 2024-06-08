@@ -23,7 +23,7 @@ export class TaskRepository {
   };
 
   public listTasks = async (projectIdDto: ProjectIdDto) => {
-    const tasks = await this.taskModel.find({ project: projectIdDto.projectId }).populate("project");
+    const tasks = await this.taskModel.find({ project: projectIdDto.projectId });
     return tasks;
   };
 

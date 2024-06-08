@@ -2,6 +2,10 @@ import "dotenv/config";
 import { get } from "env-var";
 
 export class Env {
+  public static get ENVIRONMENT() {
+    return get("ENVIRONMENT").required().asEnum(["PRODUCTION", "DEVELOPMENT"]);
+  }
+
   public static get SERVER_PORT(): number {
     return get("SERVER_PORT").required().asPortNumber();
   }
