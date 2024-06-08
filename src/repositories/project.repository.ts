@@ -16,7 +16,7 @@ export class ProjectRepository {
   };
 
   public getProjectById = async (projectId: ProjectIdDto) => {
-    const project = await this.projectModel.findById(projectId.projectId);
+    const project = await this.projectModel.findById(projectId.projectId).populate("tasks");
     return project;
   };
 

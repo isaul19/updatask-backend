@@ -14,16 +14,12 @@ declare global {
 }
 
 export const existsTaskValidator = async (req: Request, res: Response, next: NextFunction) => {
-  const { paramsValidator } = req.body;
-  const taskIdDto = paramsValidator as TaskIdDto;
-  try {
-    const taskRepository = new TaskRepository();
-    const task = await taskRepository.getTaskById(taskIdDto, req.project.id);
-    if (!task) throw CustomError.notFound(`Task ${taskIdDto.taskId} not found`);
+  const taskIdDto = req.body.paramsValidator;
 
-    req.task = task;
-    next();
-  } catch (error) {
-    handleError(res, error);
-  }
+  const taskRepository = new TaskRepository();
+  const task = await taskRepository.getTaskById(taskIdDto, req.project.id);
+  if (!task) throw CustomError.notFound(`Task ${taskIdDto.taskId} not found`);
+
+  req.task = task;
+  next();
 };
