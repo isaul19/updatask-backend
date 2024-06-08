@@ -22,15 +22,15 @@ export class ProjectService {
     return project;
   };
 
-  public createProject = async (project: CreateProjectDto) => {
-    await this.projectRepository.createProject(project);
+  public createProject = async (createProjectDto: CreateProjectDto) => {
+    await this.projectRepository.createProject(createProjectDto);
   };
 
-  public updateProject = async (projectId: ProjectIdDto, project: UpdateProjectDto) => {
-    await this.projectRepository.updateProject(projectId, project);
+  public updateProject = async (projectIdDto: ProjectIdDto, updateProjectDto: UpdateProjectDto) => {
+    await this.projectRepository.updateProject(projectIdDto, updateProjectDto);
   };
 
-  public deleteProject = async (projectId: ProjectIdDto) => {
-    await this.projectRepository.deleteProject(projectId);
+  public deleteProject = async (projectIdDto: ProjectIdDto) => {
+    await this.projectRepository.deleteProject(projectIdDto);
   };
 }

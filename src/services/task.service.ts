@@ -40,8 +40,8 @@ export class TaskService {
     await this.taskRepository.updateTask(updateTaskDto, taskId, projectId);
   };
 
-  public deleteTask = async (task: ITask, project: IProject) => {
-    await this.taskRepository.deleteTask(task.id, project);
+  public deleteTask = async (taskId: ObjectId, project: IProject) => {
+    await this.taskRepository.deleteTask(taskId, project);
   };
 
   public updateTaskStatus = async (updateTaskStatusDto: UpdateTaskStatusDto, taskId: ObjectId, projectId: ObjectId) => {
