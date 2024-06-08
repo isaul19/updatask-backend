@@ -26,9 +26,14 @@ export class ProjectRouter {
     const taskService = new TaskService();
     const taskController = new TaskController(taskService);
 
+    // =========================================
+    // PROJECTS ROUTES =========================
+    // =========================================
+
     router.get("/", projectController.listProjects);
     router.post("/", bodyValidator(CreateProjectDto), projectController.createProject);
     router.get("/:projectId", paramsValidator(ProjectIdDto), projectController.getProjectById);
+    router.delete("/:projectId", paramsValidator(ProjectIdDto), projectController.deleteProject);
     router.put(
       "/:projectId",
       paramsValidator(ProjectIdDto),
@@ -37,9 +42,9 @@ export class ProjectRouter {
       projectController.updateProject,
     );
 
-    router.delete("/:projectId", paramsValidator(ProjectIdDto), projectController.deleteProject);
-
-    // router.get("/:projectId/task", paramsValidator(ProjectIdDto), existsProjectValidator, taskController.listTasks);
+    // =========================================
+    // TASKS ROUTES ============================
+    // =========================================
 
     router.post(
       "/:projectId/task",
@@ -48,14 +53,6 @@ export class ProjectRouter {
       bodyValidator(CreateTaskDto),
       taskController.createTask,
     );
-
-    // router.get(
-    //   "/:projectId/task/:taskId",
-    //   paramsValidator(ProjectIdDto),
-    //   existsProjectValidator,
-    //   paramsValidator(TaskIdDto),
-    //   taskController.getTaskById,
-    // );
 
     router.put(
       "/:projectId/task/:taskId",

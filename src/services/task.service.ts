@@ -1,14 +1,8 @@
 import type { ObjectId } from "mongoose";
 
 import { TaskRepository } from "@repositories/task.repository";
-
-import { CustomError } from "@errors/custom.error";
-
 import type { IProject } from "@models/project.model";
-import type { ITask } from "@models/task.model";
-
-import type { CreateTaskDto, TaskIdDto, UpdateTaskDto, UpdateTaskStatusDto } from "@dtos/task";
-import type { ProjectIdDto } from "@dtos/project";
+import type { CreateTaskDto, UpdateTaskDto, UpdateTaskStatusDto } from "@dtos/task";
 
 export class TaskService {
   private taskRepository: TaskRepository;
@@ -23,17 +17,6 @@ export class TaskService {
       project: project.id,
     };
     await this.taskRepository.createTask(createdTask, project);
-  };
-
-  public listTasks = async (projectIdDto: ProjectIdDto) => {
-    const tasks = await this.taskRepository.listTasks(projectIdDto);
-    return tasks;
-  };
-
-  public getTaskById = async (taskIdDto: TaskIdDto, projectId: ObjectId) => {
-    const task = await this.taskRepository.getTaskById(taskIdDto, projectId);
-    if (!task) throw CustomError.notFound(`Task ${taskIdDto.taskId} not found`);
-    return task;
   };
 
   public updateTask = async (updateTaskDto: UpdateTaskDto, taskId: ObjectId, projectId: ObjectId) => {

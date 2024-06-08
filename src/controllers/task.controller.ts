@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+
 import type { TaskService } from "@services/task.service";
 
 export class TaskController {
@@ -14,21 +15,6 @@ export class TaskController {
 
     await this.taskService.createTask(createTaskDto, project);
     res.status(201).json({ message: "Create Task successfully" });
-  };
-
-  public listTasks = async (req: Request, res: Response) => {
-    const { paramsValidator } = req.body;
-
-    const data = await this.taskService.listTasks(paramsValidator);
-    res.status(200).json({ message: "Get Tasks successfully", data });
-  };
-
-  public getTaskById = async (req: Request, res: Response) => {
-    const taskIdDto = req.body.paramsValidator;
-    const projectId = req.project.id;
-
-    const data = await this.taskService.getTaskById(taskIdDto, projectId);
-    res.status(200).json({ message: "Get Task successfully", data });
   };
 
   public updateTask = async (req: Request, res: Response) => {
