@@ -312,4 +312,51 @@ export const projectPath: Paths = {
       },
     },
   },
+
+  [BASE_PATH + "/{projectId}/task/{taskId}/status"]: {
+    put: {
+      tags: ["Project"],
+      summary: "Update task status by id",
+      parameters: [
+        {
+          name: "projectId",
+          in: "path",
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+        {
+          name: "taskId",
+          in: "path",
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                status: {
+                  type: "string",
+                  enum: ["PENDING", "ON_HOLD", "IN_PROGRESS", "UNDER_REVIEW", "COMPLETED"],
+                  required: true,
+                },
+              },
+            },
+          },
+        },
+      },
+      responses: {
+        "200": {
+          description: "Update task status by id successfully",
+        },
+      },
+    },
+  },
 };

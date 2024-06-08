@@ -76,7 +76,7 @@ export class ProjectRouter {
       taskController.deleteTask,
     );
 
-    router.post(
+    router.put(
       "/:projectId/task/:taskId/status",
       paramsValidator(ProjectIdDto),
       existsProjectValidator,
