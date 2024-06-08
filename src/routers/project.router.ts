@@ -13,7 +13,7 @@ import { existsTaskValidator } from "@middlewares/validators/task";
 import { existsProjectValidator } from "@middlewares/validators/project";
 
 import { CreateProjectDto, ProjectIdDto, UpdateProjectDto } from "@dtos/project";
-import { CreateTaskDto, TaskIdDto, UpdateTaskStatusDto } from "@dtos/task";
+import { CreateTaskDto, TaskIdDto, UpdateTaskDto, UpdateTaskStatusDto } from "@dtos/task";
 
 export class ProjectRouter {
   public static get router() {
@@ -63,6 +63,7 @@ export class ProjectRouter {
       existsProjectValidator,
       paramsValidator(TaskIdDto),
       existsTaskValidator,
+      bodyValidator(UpdateTaskDto),
       taskController.updateTask,
     );
 

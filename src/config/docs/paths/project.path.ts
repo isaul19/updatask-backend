@@ -277,6 +277,11 @@ export const projectPath: Paths = {
           },
         },
       },
+      responses: {
+        "200": {
+          description: "Delete task by id successfully",
+        },
+      },
     },
 
     delete: {
