@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
+
 import { Print } from "@adapters/print.adapter";
 import { inicializateDocs } from "@config/docs/swagger";
 
@@ -29,6 +31,7 @@ export class Server {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
+    this.app.use(morgan("dev"));
   }
 
   public start = () => {
