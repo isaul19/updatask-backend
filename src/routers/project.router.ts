@@ -32,8 +32,13 @@ export class ProjectRouter {
 
     router.get("/", projectController.listProjects);
     router.post("/", bodyValidator(CreateProjectDto), projectController.createProject);
-    router.get("/:projectId", paramsValidator(ProjectIdDto), projectController.getProjectById);
-    router.delete("/:projectId", paramsValidator(ProjectIdDto), projectController.deleteProject);
+    router.get("/:projectId", paramsValidator(ProjectIdDto), existsProjectValidator, projectController.getProjectById);
+    router.delete(
+      "/:projectId",
+      paramsValidator(ProjectIdDto),
+      existsProjectValidator,
+      projectController.deleteProject,
+    );
     router.put(
       "/:projectId",
       paramsValidator(ProjectIdDto),
@@ -45,6 +50,8 @@ export class ProjectRouter {
     // =========================================
     // TASKS ROUTES ============================
     // =========================================
+
+    router.get("/:projectId/task", paramsValidator(ProjectIdDto), existsProjectValidator, taskController.listTasks);
 
     router.post(
       "/:projectId/task",

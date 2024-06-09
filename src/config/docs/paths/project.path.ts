@@ -142,6 +142,26 @@ export const projectPath: Paths = {
   },
 
   [BASE_PATH + "/{projectId}/task"]: {
+    get: {
+      tags: ["Project"],
+      summary: "List all tasks by project id",
+      parameters: [
+        {
+          name: "projectId",
+          in: "path",
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      responses: {
+        "200": {
+          description: "List all tasks by project id successfully",
+        },
+      },
+    },
+
     post: {
       tags: ["Project"],
       summary: "Create task by project id",

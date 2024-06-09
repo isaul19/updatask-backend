@@ -9,6 +9,12 @@ export class TaskController {
     this.taskService = taskService;
   }
 
+  public listTasks = async (req: Request, res: Response) => {
+    const projectId = req.project.id;
+    const tasks = await this.taskService.listTasks(projectId);
+    res.status(200).json({ message: "List Tasks successfully", data: tasks });
+  };
+
   public createTask = async (req: Request, res: Response) => {
     const createTaskDto = req.body.bodyValidator;
     const project = req.project;

@@ -10,6 +10,11 @@ export class TaskRepository {
     this.taskModel = Task;
   }
 
+  public listTasks = async (projectId: ObjectId) => {
+    const tasks = await this.taskModel.find({ project: projectId });
+    return tasks;
+  };
+
   public createTask = async (createTaskDto: CreateTaskDto, project: IProject) => {
     const createdTask = new this.taskModel(createTaskDto);
     project.tasks.push(createdTask);
