@@ -206,6 +206,34 @@ export const projectPath: Paths = {
   },
 
   [BASE_PATH + "/{projectId}/task/{taskId}"]: {
+    get: {
+      tags: ["Project"],
+      summary: "Get task by id",
+      parameters: [
+        {
+          name: "projectId",
+          in: "path",
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+        {
+          name: "taskId",
+          in: "path",
+          required: true,
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      responses: {
+        "200": {
+          description: "Get task by id successfully",
+        },
+      },
+    },
+
     put: {
       tags: ["Project"],
       summary: "Update task by id",

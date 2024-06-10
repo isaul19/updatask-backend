@@ -53,6 +53,15 @@ export class ProjectRouter {
 
     router.get("/:projectId/task", paramsValidator(ProjectIdDto), existsProjectValidator, taskController.listTasks);
 
+    router.get(
+      "/:projectId/task/:taskId",
+      paramsValidator(ProjectIdDto),
+      existsProjectValidator,
+      paramsValidator(TaskIdDto),
+      existsTaskValidator,
+      taskController.getTaskById,
+    );
+
     router.post(
       "/:projectId/task",
       paramsValidator(ProjectIdDto),

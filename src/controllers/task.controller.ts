@@ -15,6 +15,13 @@ export class TaskController {
     res.status(200).json({ message: "List Tasks successfully", data: tasks });
   };
 
+  public getTaskById = async (req: Request, res: Response) => {
+    const projectId = req.project.id;
+    const taskId = req.task.id;
+    const task = await this.taskService.getTaskById(projectId, taskId);
+    res.status(200).json({ message: "Get Task successfully", data: task });
+  };
+
   public createTask = async (req: Request, res: Response) => {
     const createTaskDto = req.body.bodyValidator;
     const project = req.project;
