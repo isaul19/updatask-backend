@@ -14,11 +14,6 @@ export class ProjectService {
     return projects;
   };
 
-  public getProjectById = async (projectId: ObjectId) => {
-    const project = await this.projectRepository.getProjectById(projectId);
-    return project;
-  };
-
   public createProject = async (createProjectDto: CreateProjectDto) => {
     await this.projectRepository.createProject(createProjectDto);
   };

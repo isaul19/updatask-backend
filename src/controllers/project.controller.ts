@@ -14,8 +14,7 @@ export class ProjectController {
   };
 
   public getProjectById = async (req: Request, res: Response) => {
-    const projectId = req.project.id;
-    const project = await this.projectService.getProjectById(projectId);
+    const project = req.project;
     res.status(200).json({ message: "Get Project successfully", data: project });
   };
 

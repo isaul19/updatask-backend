@@ -16,9 +16,7 @@ export class TaskController {
   };
 
   public getTaskById = async (req: Request, res: Response) => {
-    const projectId = req.project.id;
-    const taskId = req.task.id;
-    const task = await this.taskService.getTaskById(projectId, taskId);
+    const task = req.task;
     res.status(200).json({ message: "Get Task successfully", data: task });
   };
 

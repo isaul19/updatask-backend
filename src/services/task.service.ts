@@ -16,11 +16,6 @@ export class TaskService {
     return tasks;
   };
 
-  public getTaskById = async (projectId: ObjectId, taskId: ObjectId) => {
-    const task = await this.taskRepository.getTaskById(projectId, taskId);
-    return task;
-  };
-
   public createTask = async (createTaskDto: CreateTaskDto, project: IProject) => {
     const createdTask = {
       ...createTaskDto,
